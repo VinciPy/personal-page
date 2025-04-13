@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from '@/components/Layout';
 import Section from '@/components/Section';
@@ -6,6 +5,7 @@ import SectionTitle from '@/components/SectionTitle';
 import BlogCard from '@/components/BlogCard';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Mock data for blog posts
 const blogPosts = [
@@ -61,6 +61,7 @@ const blogPosts = [
 
 const Blog = () => {
   const [searchQuery, setSearchQuery] = React.useState('');
+  const { t } = useLanguage();
   
   const filteredPosts = blogPosts.filter(post => {
     const searchContent = `${post.title} ${post.excerpt} ${post.tags.join(' ')}`.toLowerCase();
@@ -73,7 +74,7 @@ const Blog = () => {
         <div className="max-w-2xl mx-auto text-center mb-12">
           <SectionTitle>Blog</SectionTitle>
           <p className="text-muted-foreground text-lg mb-8">
-            Thoughts, ideas, and insights on design, development, and technology.
+            {t('blog.description')}
           </p>
           
           <div className="relative max-w-md mx-auto">

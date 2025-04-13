@@ -22,28 +22,28 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} John Doe. All rights reserved.
+              © {new Date().getFullYear()} Vinicius Santanta. All rights reserved.
             </p>
           </div>
           
           <div className="flex items-center space-x-1">
             <SocialLink 
-              href="https://github.com/johndoe"
+              href="https://github.com/vincipy"
               icon={Github}
               label="GitHub"
             />
             <SocialLink 
-              href="https://twitter.com/johndoe"
+              href="https://twitter.com/vincipy"
               icon={Twitter}
               label="Twitter"
             />
             <SocialLink 
-              href="https://linkedin.com/in/johndoe"
+              href="https://www.linkedin.com/in/vinicius-santana-anjos/"
               icon={Linkedin}
               label="LinkedIn"
             />
             <SocialLink 
-              href="mailto:hello@johndoe.com"
+              href="mailto:vincicius.santana.anjos@gmail.com"
               icon={Mail}
               label="Email"
             />

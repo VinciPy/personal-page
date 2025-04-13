@@ -1,12 +1,12 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Menu, Moon, Sun, X } from 'lucide-react';
+import { Menu, Moon, Sun, X, Globe } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
 import { Toggle } from '@/components/ui/toggle';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface NavItemProps {
   to: string;
@@ -33,9 +33,16 @@ const Header = () => {
   const isMobile = useIsMobile();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { language, setLanguage } = useLanguage();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const getNextLanguage = (current: 'en' | 'fr' | 'pt-BR'): 'en' | 'fr' | 'pt-BR' => {
+    const languages: ('en' | 'fr' | 'pt-BR')[] = ['en', 'fr', 'pt-BR'];
+    const currentIndex = languages.indexOf(current);
+    return languages[(currentIndex + 1) % languages.length];
   };
 
   return (
@@ -43,7 +50,7 @@ const Header = () => {
       <div className="container max-w-5xl mx-auto px-4 md:px-6">
         <nav className="flex items-center justify-between">
           <Link to="/" className="text-lg font-bold text-white transition-colors hover:text-white/90 flex items-center">
-            John Doe <span className="ml-2">👨‍💻</span>
+            Vinicius Santanta <span className="ml-2">👨‍💻</span>
           </Link>
 
           {!isMobile ? (
@@ -52,6 +59,15 @@ const Header = () => {
               <NavItem to="/blog">Blog</NavItem>
               <NavItem to="/about">About</NavItem>
               <NavItem to="/contact">Contact</NavItem>
+              <Toggle 
+                aria-label="Toggle language"
+                className="ml-2" 
+                pressed={false}
+                onPressedChange={() => setLanguage(getNextLanguage(language))}
+              >
+                <Globe size={18} />
+                <span className="ml-1 text-xs">{language.toUpperCase()}</span>
+              </Toggle>
               <Toggle 
                 aria-label="Toggle theme"
                 className="ml-2" 
@@ -63,6 +79,15 @@ const Header = () => {
             </div>
           ) : (
             <div className="flex items-center">
+              <Toggle 
+                aria-label="Toggle language"
+                className="mr-2" 
+                pressed={false}
+                onPressedChange={() => setLanguage(getNextLanguage(language))}
+              >
+                <Globe size={18} />
+                <span className="ml-1 text-xs">{language.toUpperCase()}</span>
+              </Toggle>
               <Toggle 
                 aria-label="Toggle theme"
                 className="mr-2" 
