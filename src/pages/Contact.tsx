@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from '@/components/Layout';
 import Section from '@/components/Section';
@@ -9,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { Mail, Github, Twitter, Linkedin } from 'lucide-react';
 import { toast } from 'sonner';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const SocialLink = ({ href, icon: Icon, label, description }: { 
   href: string; 
@@ -39,6 +39,7 @@ const Contact = () => {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const { t } = useLanguage();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -53,7 +54,7 @@ const Contact = () => {
     setTimeout(() => {
       setIsSubmitting(false);
       setFormData({ name: '', email: '', message: '' });
-      toast.success('Your message has been sent!');
+      toast.success(t('contact.form.success'));
     }, 1500);
   };
 
@@ -61,20 +62,20 @@ const Contact = () => {
     <Layout>
       <Section>
         <div className="max-w-2xl mx-auto text-center mb-12">
-          <SectionTitle>Get in Touch</SectionTitle>
+          <SectionTitle>{t('contact.title')}</SectionTitle>
           <p className="text-muted-foreground text-lg">
-            Feel free to reach out for collaborations, opportunities, or just to say hi!
+            {t('contact.description')}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Card className="border-none bg-secondary/20">
             <CardContent className="pt-6">
-              <h3 className="text-xl font-semibold mb-4">Contact Form</h3>
+              <h3 className="text-xl font-semibold mb-4">{t('contact.form.title')}</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <Input
-                    placeholder="Your Name"
+                    placeholder={t('contact.form.name')}
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
@@ -84,7 +85,7 @@ const Contact = () => {
                 <div>
                   <Input
                     type="email"
-                    placeholder="Your Email"
+                    placeholder={t('contact.form.email')}
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
@@ -93,7 +94,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <Textarea
-                    placeholder="Your Message"
+                    placeholder={t('contact.form.message')}
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
@@ -102,37 +103,37 @@ const Contact = () => {
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
                 </Button>
               </form>
             </CardContent>
           </Card>
 
           <div className="space-y-4">
-            <h3 className="text-xl font-semibold mb-4">Connect with Me</h3>
+            <h3 className="text-xl font-semibold mb-4">{t('contact.connect.title')}</h3>
             <SocialLink 
               href="mailto:hello@johndoe.com"
               icon={Mail}
-              label="Email"
-              description="hello@johndoe.com"
+              label={t('contact.connect.email')}
+              description="vinicius.santana.anjos@gmail.com"
             />
             <SocialLink 
-              href="https://github.com/johndoe"
+              href="https://github.com/vincipy"
               icon={Github}
-              label="GitHub"
-              description="github.com/johndoe"
+              label={t('contact.connect.github')}
+              description="github.com/vincipy"
             />
             <SocialLink 
               href="https://twitter.com/johndoe"
               icon={Twitter}
-              label="Twitter"
-              description="twitter.com/johndoe"
+              label={t('contact.connect.twitter')}
+              description="twitter.com/vincipy"
             />
             <SocialLink 
-              href="https://linkedin.com/in/johndoe"
+              href="https://www.linkedin.com/in/vinicius-santana-anjos/"
               icon={Linkedin}
-              label="LinkedIn"
-              description="linkedin.com/in/johndoe"
+              label={t('contact.connect.linkedin')}
+              description="linkedin.com/in/vinicius-santana-anjos/"
             />
           </div>
         </div>

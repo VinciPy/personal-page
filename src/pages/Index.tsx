@@ -72,7 +72,7 @@ const Index = () => {
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20 shadow-lg shadow-primary/10">
               <Avatar className="w-full h-full">
                 <AvatarImage 
-                  src="/icon.png" 
+                  src="/icon.jpg" 
                   alt="Profile Photo"
                   className="object-cover"
                 />
